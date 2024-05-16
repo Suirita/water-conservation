@@ -2,6 +2,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 const app = express();
 dotenv.config({ path: ".env.local" });
 
@@ -32,7 +34,7 @@ app.get("/", (req, res) => {
 });
 
 // User routes
-app.get("/user", async (req, res, next) => {
+app.get("/user/all", async (req, res, next) => {
   try {
     const users = await Users.find();
     res.json(users);
@@ -40,6 +42,62 @@ app.get("/user", async (req, res, next) => {
     next(err);
   }
 });
+
+// User login
+app.post("/login", async (req, res, next) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({ error: "All the fields are required" });
+  }
+  try {
+    const user = await Users.findOne({ email });
+    if (!user) {
+      return res.status(401).json({ error: "Invalid email or password" });
+    }
+    bcrypt.compare(password, user.password, (err, result) => {
+      if (err) {
+        return next(err);
+      }
+      if (result) {
+        // Passwords match
+        const token = jwt.sign({ user_id: user._id }, process.env.JWT_SECRET);
+        res.cookie("token", token, { httpOnly: true });
+        res.status(200).json({ message: "Login successful" });
+      }
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// User Logout
+app.get("/logout", (req, res) => {
+  res.clearCookie("token");
+  res.status(200).json({ message: "Logout successful" });
+});
+
+// User information
+app.get("/user", async (req, res, next) => {
+  try {
+    const token = req.cookies.token;
+    if (!token) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    const userId = decodedToken.user_id;
+    if (!userId) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    const user = await Users.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    res.json(user);
+  } catch (err) {
+    next(err);
+  }
+});
+
 
 // City routes
 app.get("/city", async (req, res, next) => {
