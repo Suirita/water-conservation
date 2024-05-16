@@ -66,7 +66,7 @@ const UsersSchema = new mongoose.Schema(
       required: true,
     },
   },
-  {collection: "Users"}
+  { collection: "Users" }
 );
 
 // Create the Users model
