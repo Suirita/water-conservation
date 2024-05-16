@@ -1,8 +1,9 @@
-import Consumption from "@/Components/Consumption";
+// import Consumption from "@/Components/Consumption";
+import Points from "@/Components/Points";
 
 export default function Home() {
   return (
-   <Consumption/>
+   <Points/>
   );
 }
 
