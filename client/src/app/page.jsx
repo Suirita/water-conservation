@@ -1,7 +1,8 @@
-import Statistics from "@/Components/Statistics";
+import Consumption from "@/Components/Consumption";
 
 export default function Home() {
   return (
-   <Statistics/>
+   <Consumption/>
   );
 }
+
