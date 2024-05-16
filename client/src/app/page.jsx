@@ -1,11 +1,9 @@
-import Statistics from "@/Components/Statistics";
-import Consumption_barriers from "@/Components/Consumption_barriers";
+// import Consumption from "@/Components/Consumption";
+import Points from "@/Components/Points";
 
 export default function Home() {
   return (
-    <>
-      {/* <Statistics /> */}
-      <Consumption_barriers />
-    </>
+   <Points/>
   );
 }
+
