@@ -1,4 +1,4 @@
-import Statistics from "@/Components/Statistics";
+import Consumption from "@/Components/Consumption";
 
 export default function Home() {
   return (
@@ -29,3 +29,4 @@ export default function Home() {
    </main>
   );
 }
+
