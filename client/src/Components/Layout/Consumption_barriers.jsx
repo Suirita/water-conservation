@@ -1,6 +1,6 @@
 const Consumption_barriers = () => {
   return (
-    <div className="bg-slate-100 mx-24 p-5 rounded-lg">
+    <div className="bg-slate-100 mx-10 mt-10 pt-8 pb-3 rounded-lg">
       <div className="flex justify-between">
         <div className="text-lg font-bold ml-8">Consumption_barriers</div>
         <div className="font-bold mr-10">Monthly</div>
