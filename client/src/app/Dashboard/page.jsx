@@ -1,15 +1,15 @@
+import Consumption_barriers from "@/Components/Layout/Consumption_barriers"
 import Bill from "@/Components/Layout/Bill"
 import Statisitc from "@/Components/Layout/Statisitc"
 import Link from "next/link"
+import Header from "@/Components/Layout/Header"
 // Components
 
 const page = () => {
   return (
     <>
-        <header className="px-8 py-5 border-b">
-            <h1 className="font-semibold text-blue-300 text-lg">AmanWater</h1>
-        </header>
-        <main className="mb-10">
+        <Header/>
+        <main className="mb-28">
             <div className="px-10 py-5">
                 <div class="flex justify-between py-5">
                     <h4 className="font-bold">Water Usage Statisics:</h4>
@@ -51,6 +51,7 @@ const page = () => {
                     </div>
                 </div>
             </div>
+            <Consumption_barriers/>
             <div className="flex justify-between gap-5 px-10 mt-10"> 
                 <div className="bg-slate-100 w-2/4 rounded-2xl py-5 px-8 flex flex-col gap-20">
                     <div className="flex justify-between">
